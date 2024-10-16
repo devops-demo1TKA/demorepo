@@ -1,4 +1,4 @@
-name: CD Pipeline
+name: CI Pipeline
 
 on:
   push:
@@ -21,15 +21,5 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run build
-        run: npm run build
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Deploy to Production Server
-        run: |
-          echo "Deploying to production server..."
-          ssh user@server 'cd /path/to/app && git pull && npm install && pm2 restart all'
+      - name: Run tests
+        run: npm test
